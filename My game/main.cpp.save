@@ -84,22 +84,68 @@ struct Man
 
 };
 
+struct Key
+{
+   int x;
+   int y;
+   int w;
+   int h;
+   HDC image;
+   bool visible;
+   int v;
+
+    void draw()
+    {
+        if (visible)
+        {
+            Win32::TransparentBlt(txDC(), x, y, 50, 25, image, 0, 0, w, h, TX_WHITE);
+        }
+    }
+};
+
+struct Lock
+{
+   int x;
+   int y;
+   int w;
+   int h;
+   HDC image;
+   bool visible;
+   int v;
+
+    void draw()
+    {
+        if (visible)
+        {
+            Win32::TransparentBlt(txDC(), x, y, 50, 50, image, 0, 0, w, h, TX_WHITE);
+        }
+    }
+};
+
 int main()
 {
-txCreateWindow (1280, 720);
+txCreateWindow (1280, 820);
 txTextCursor (false);
+HDC karta = txLoadImage("Pictures/Map.bmp");
+HDC menu = txLoadImage("Pictures/Fon.bmp");
+HDC key = txLoadImage("Pictures/Key.bmp");
+HDC locker = txLoadImage("Pictures/Lock.bmp");
 
-Man man = {0, 0, 100, 100, 100, 100, txLoadImage("Pictures/man.bmp"), 0};
+Man man = {0, 620, 30, 30, 100, 100, txLoadImage("Pictures/man.bmp"), 0};
+Lock locker ={{1198,40,1198+50,40+50,txLoadImage("Pictures/Key.bmp"),true};
+Key key ={119,189,119+50,189+25,txLoadImage("Pictures/Lock.bmp"),true};
 int x_man_old, y_man_old;
 
     while(!GetAsyncKeyState(VK_ESCAPE))
     {
         txClear();
         txBegin();
-
+        txBitBlt(txDC(), 0, 0, 1280, 820, karta);
         man.draw();
+        key.draw();
+        locker.draw();
         txSetColor(RGB(0, 0, 0), 15);
-        txRectangle(400, 50, 420, 200);
+
 
         x_man_old = man.x;
         y_man_old = man.y;
@@ -110,7 +156,7 @@ int x_man_old, y_man_old;
             man.yn_kard = 0;
             man.xn_kard += 1;
             if(man.xn_kard>3) man.xn_kard=0;
-            txSleep(60);
+            txSleep(50);
         }
         if(GetAsyncKeyState(VK_LEFT))
         {
@@ -118,7 +164,7 @@ int x_man_old, y_man_old;
             man.xn_kard += 1;
             man.yn_kard = 1;
             if(man.xn_kard>3) man.xn_kard=0;
-            txSleep(60);
+            txSleep(50);
         }
 
         if(GetAsyncKeyState(VK_RIGHT))
@@ -127,7 +173,7 @@ int x_man_old, y_man_old;
             man.xn_kard += 1;
             man.yn_kard = 2;
             if(man.xn_kard>3) man.xn_kard=0;
-            txSleep(60);
+            txSleep(50);
         }
         if(GetAsyncKeyState(VK_UP))
         {
@@ -135,14 +181,14 @@ int x_man_old, y_man_old;
             man.yn_kard = 3;
             man.xn_kard += 1;
             if(man.xn_kard>3) man.xn_kard=0;
-            txSleep(60);
+            txSleep(50);
         }
 
 
 
-        for(int x=man.x; x<man.x+man.w_; x+=10)
+        for(int x=man.x+1; x<man.x+man.w_; x+=11)
             {
-                for(int y=man.y; y<man.y+man.h_; y+=10)
+                for(int y=man.y+2; y<man.y+man.h_; y+=12)
                 {
                     if(txGetPixel(x, y) == RGB(0, 0, 0))
                     {
