@@ -117,7 +117,7 @@ struct Lock
     {
         if (visible)
         {
-            Win32::TransparentBlt(txDC(), x, y, 50, 50, image, 0, 0, w, h, TX_WHITE);
+            Win32::TransparentBlt(txDC(), x, y, 35, 35, image, 0, 0, w, h, TX_WHITE);
         }
     }
 };
@@ -130,18 +130,20 @@ HDC karta = txLoadImage("Pictures/Map.bmp");
 HDC menu = txLoadImage("Pictures/Fon.bmp");
 
 Man man = {10, 620, 30, 30, 100, 100, txLoadImage("Pictures/man.bmp"), 0};
-Lock lock ={1198,40,50,50,txLoadImage("Pictures/Key.bmp"),true};
-Key key ={119,189,50,25,txLoadImage("Pictures/Lock.bmp"),true};
+Lock lock ={1190,40,49,50,txLoadImage("Pictures/Lock.bmp"),true};
+Key key ={158,189,50,25,txLoadImage("Pictures/Key.bmp"),true};
 int x_man_old, y_man_old;
+
+
 
     while(!GetAsyncKeyState(VK_ESCAPE))
     {
         txClear();
         txBegin();
         txBitBlt(txDC(), 0, 0, 1280, 820, karta);
-        man.draw();
         key.draw();
         lock.draw();
+        man.draw();
         txSetColor(RGB(0, 0, 0), 15);
 
 
@@ -194,7 +196,18 @@ int x_man_old, y_man_old;
                     }
                 }
             }
-//----------------
+ //----------------
+         for(int x=man.x+1; x<man.x+man.w_; x+=11)
+            {
+                for(int y=man.y+2; y<man.y+man.h_; y+=12)
+                {
+                    if(txGetPixel(x, y) == RGB(245, 207, 17))
+                    {
+                        key.visible = false;
+                        lock.visible = false;
+                    }
+                }
+            }
 
         txEnd();
         txSleep(50);
