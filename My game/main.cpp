@@ -92,7 +92,7 @@ struct Key
    int h;
    HDC image;
    bool visible;
-   int v;
+
 
     void draw()
     {
@@ -111,7 +111,7 @@ struct Lock
    int h;
    HDC image;
    bool visible;
-   int v;
+
 
     void draw()
     {
@@ -129,7 +129,7 @@ txTextCursor (false);
 HDC karta = txLoadImage("Pictures/Map.bmp");
 HDC menu = txLoadImage("Pictures/Fon.bmp");
 
-Man man = {0, 620, 30, 30, 100, 100, txLoadImage("Pictures/man.bmp"), 0};
+Man man = {10, 620, 30, 30, 100, 100, txLoadImage("Pictures/man.bmp"), 0};
 Lock lock ={1198,40,50,50,txLoadImage("Pictures/Key.bmp"),true};
 Key key ={119,189,50,25,txLoadImage("Pictures/Lock.bmp"),true};
 int x_man_old, y_man_old;
@@ -147,7 +147,7 @@ int x_man_old, y_man_old;
 
         x_man_old = man.x;
         y_man_old = man.y;
-
+//Управление
         if(GetAsyncKeyState(VK_DOWN))
         {
             man.y += 5;
@@ -164,7 +164,6 @@ int x_man_old, y_man_old;
             if(man.xn_kard>3) man.xn_kard=0;
             txSleep(50);
         }
-
         if(GetAsyncKeyState(VK_RIGHT))
         {
             man.x += 5;
@@ -181,9 +180,9 @@ int x_man_old, y_man_old;
             if(man.xn_kard>3) man.xn_kard=0;
             txSleep(50);
         }
+//----------------
 
-
-
+//Теперь в стены можно уператься
         for(int x=man.x+1; x<man.x+man.w_; x+=11)
             {
                 for(int y=man.y+2; y<man.y+man.h_; y+=12)
@@ -195,11 +194,15 @@ int x_man_old, y_man_old;
                     }
                 }
             }
+//----------------
 
         txEnd();
         txSleep(50);
 
     }
+txDeleteDC(karta);
+txDeleteDC(menu);
+
 
 txDisableAutoPause();
 return 0;
