@@ -122,3 +122,53 @@ Run file:	C:\Инженерка\Project Game\My game\bin\Debug\My game.exe
 Directory:	C:\Инженерка\Project Game\My game
 
 --------------------------------------------------
+
+--------------------------------------------------
+TXLib соболезнует...
+
+Программа: C:\Инженерка\Project Game\My-game\bin\Debug\My game.exe, файл: c:\ded32\codeblocks\mingw\include\txlib.h, строка: 13722, функция: bool {anonymous}::TX::txBitBlt(HDC, double, double, double, double, HDC, double, double, unsigned int),
+
+Сообщение: Параметр "sourceImage" неверен. Возможно, этот холст не создан, или уже уничтожен, или не загрузилась картинка.
+
+#1: TXLib [Ver: 00173a, Rev: 173, Date: 2024-06-23 22:37:05 +0400], Instance: 0x005082FC (32-bit), Flags: CMdRe0, Thread: 0x30F4 (Main), GetLastError(): 13 (Недопустимые данные). 
+
+--------------------------------------------------
+Стек вызовов:
+
+
+
+--------------------------------------------------
+Стек вызовов TX:
+
+# 0 in bool {anonymous}::TX::txBitBlt(HDC, double, double, double, double, HDC, double, double, unsigned int) at c:\ded32\codeblocks\mingw\include\txlib.h:13722:
+
+  13720:     {
+  13721: $1  if (_TX_HDC_FAILED (destImage))   return false;
+=>13722: $   if (_TX_HDC_FAILED (sourceImage)) return false;
+  13723: 
+  13724: $   POINT size = txGetExtent (sourceImage);
+
+# 1 in int main() at C:\Инженерка\Project Game\SeaBattle-main\main.cpp:122:
+
+    120:         if(PAGE == "menu")
+    121:         {
+=>  122:             txBitBlt(txDC(), 0, 0, 800, 600, menu);
+    123:             btn0.draw();
+    124:             btn1.draw();
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 173, Date: 2024-06-23 22:37:05 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	c:\ded32\codeblocks\mingw\include\txlib.h
+Compiled:	Feb 20 2025 13:34:24, GNU g++ 4.8.1, std=201103L, MinGW Runtime 3.20, 32-bit, DEBUG
+Started:	Feb 20 2025 13:34:33
+
+Run file:	C:\Инженерка\Project Game\My-game\bin\Debug\My game.exe
+Directory:	C:\Инженерка\Project Game\My-game
+
+--------------------------------------------------
