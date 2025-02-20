@@ -130,8 +130,8 @@ HDC karta = txLoadImage("Pictures/Map.bmp");
 HDC menu = txLoadImage("Pictures/menu.bmp");
 
 Man man = {10, 620, 30, 30, 100, 100, txLoadImage("Pictures/man.bmp"), 0};
-Lock lock ={1190,42,49,50,txLoadImage("Pictures/Lock.bmp"),true};
-Key key ={158,180,50,25,txLoadImage("Pictures/Key.bmp"),true};
+Lock lock ={1150,42,49,50,txLoadImage("Pictures/Lock.bmp"),true};
+Key key ={153,180,50,25,txLoadImage("Pictures/Key.bmp"),true};
 int x_man_old, y_man_old;
 string PAGE = "menu";
 
@@ -140,6 +140,8 @@ Button btn1 = {540, 250, 200, 40, "Управление", true};
 Button btn2 = {540, 350, 200, 40, "Выход", true};
 Button btn3 = {5, 5, 200, 40, "Назад", true};
 Button btn4 = {540, 300, 200, 40, "Об авторе", true};
+
+
 
 
 
@@ -290,7 +292,7 @@ Button btn4 = {540, 300, 200, 40, "Об авторе", true};
             txBitBlt(txDC(), 0, 0, 1280, 820, menu);
             txSelectFont("Times New Roman", 30);
             txSetColor (TX_BLACK);
-            txDrawText(84, 254, 44+1000, 254+100, "Ссылка на оригинальную игру- https://github.com/NIVqwerty/My-game.git");
+            txDrawText(84, 254, 44+1000, 254+100, "Ссылка на игру- https://github.com/NIVqwerty/My-game.git");
             txDrawText(84, 294, 84+600, 294+100, "Телеграмм автора - https://t.me/QwertyHoh");
             btn3.draw();
         }
