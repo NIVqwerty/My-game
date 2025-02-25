@@ -127,6 +127,9 @@ int main()
 txCreateWindow (1280, 820);
 txTextCursor (false);
 HDC karta = txLoadImage("Pictures/Map.bmp");
+HDC kartaezy = txLoadImage("Pictures/Mapezy.bmp");
+HDC minikarta = txLoadImage("Pictures/miniMap.bmp");
+HDC minikartaezy = txLoadImage("Pictures/miniMapezy.bmp");
 HDC menu = txLoadImage("Pictures/menu.bmp");
 
 Man man = {10, 620, 30, 30, 100, 100, txLoadImage("Pictures/man.bmp"), 0};
@@ -140,13 +143,18 @@ Button btn1 = {540, 250, 200, 40, "Управление", true};
 Button btn2 = {540, 350, 200, 40, "Выход", true};
 Button btn3 = {5, 5, 200, 40, "Назад", true};
 Button btn4 = {540, 300, 200, 40, "Об авторе", true};
+Button btn5 = {560, 380, 70, 40, "ДА", true};
+Button btn6 = {650, 380, 70, 40, "НЕТ", true};
+Button btn7 = {150, 394, 457, 40, "Лёгкий", true};
+Button btn8 = {690, 394, 457, 40, "Сложный", true};
 
 
 
 
 
 
-    while(!btn2.click())
+
+    while(!btn5.click())
     {
         txClear();
         txBegin();
@@ -161,7 +169,7 @@ Button btn4 = {540, 300, 200, 40, "Об авторе", true};
 
             if(btn0.click())
             {
-                PAGE = "game";
+                PAGE = "startgame";
             }
             if(btn1.click())
             {
@@ -171,15 +179,47 @@ Button btn4 = {540, 300, 200, 40, "Об авторе", true};
             {
                 PAGE = "author";
             }
+            if(btn2.click())
+            {
+                PAGE = "leave";
+            }
             txSetFillColor (TX_BLACK);
+        }
+        if(PAGE == "leave")
+        {
+        btn3.draw();
+        //Возврат в меню
+        if(btn6.click())
+        {
+            PAGE = "menu";
+        }
+        if(GetAsyncKeyState(VK_ESCAPE))
+        {
+            PAGE = "menu";
+        }
+        //---------------------
+        btn2.visible = false;
+        txBitBlt(txDC(), 0, 0, 1280, 820, menu);
+        txSelectFont("Times New Roman", 30);
+        txSetColor (TX_BLACK);
+        txDrawText(304, 304, 44+900, 254+100, "Вы уверенны что хотите выйти?");
+
+        btn5.draw();
+        btn6.draw();
+
         }
         if(PAGE == "rules")
         {
-            btn3.draw();
+            //Возврат в меню
             if(btn3.click())
             {
                 PAGE = "menu";
             }
+            if(GetAsyncKeyState(VK_ESCAPE))
+            {
+                PAGE = "menu";
+            }
+            //------------------
             btn2.visible = false;
             txBitBlt(txDC(), 0, 0, 1280, 820, menu);
             txSelectFont("Times New Roman", 30);
@@ -191,6 +231,34 @@ Button btn4 = {540, 300, 200, 40, "Об авторе", true};
             txDrawText(84, 384, 84+600, 384+100, "D-вправо");
             btn3.draw();
         }
+        if(PAGE == "startgame")
+        {
+        txBitBlt(txDC(), 0, 0, 1280, 820, menu);
+        txBitBlt(txDC(), 150, 100, 457, 289, minikartaezy);
+        txBitBlt(txDC(), 690, 100, 457, 289, minikarta);
+        btn3.draw();
+        btn7.draw();
+        btn8.draw();
+        txDrawText(550, 50, 550+300, 50+50, "Выбирете уровень:");
+            //Возврат в меню
+            if(btn3.click())
+            {
+                PAGE = "menu";
+            }
+            if(GetAsyncKeyState(VK_ESCAPE))
+            {
+                PAGE = "menu";
+            }
+            //---------------------
+            if(btn8.click())
+            {
+                PAGE = "game";
+            }
+             if(btn7.click())
+            {
+                PAGE = "1game";
+            }
+        }
         if(PAGE == "game")
         {
 
@@ -199,8 +267,103 @@ Button btn4 = {540, 300, 200, 40, "Об авторе", true};
         lock.draw();
         man.draw();
         txSetColor(RGB(0, 0, 0), 15);
+        lock.x =1150;
+        lock.y =42;
+        key.x = 153;
+        key.y = 180;
+        x_man_old = man.x;
+        y_man_old = man.y;
+//Управление
+        if(GetAsyncKeyState('S'))
+        {
+            man.y += 5;
+            man.yn_kard = 0;
+            man.xn_kard += 1;
+            if(man.xn_kard>3) man.xn_kard=0;
+            txSleep(50);
+        }
+        if(GetAsyncKeyState('A'))
+        {
+            man.x -= 5;
+            man.xn_kard += 1;
+            man.yn_kard = 1;
+            if(man.xn_kard>3) man.xn_kard=0;
+            txSleep(50);
+        }
+        if(GetAsyncKeyState('D'))
+        {
+            man.x += 5;
+            man.xn_kard += 1;
+            man.yn_kard = 2;
+            if(man.xn_kard>3) man.xn_kard=0;
+            txSleep(50);
+        }
+        if(GetAsyncKeyState('W'))
+        {
+            man.y -= 5;
+            man.yn_kard = 3;
+            man.xn_kard += 1;
+            if(man.xn_kard>3) man.xn_kard=0;
+            txSleep(50);
+        }
+//----------------
+
+//Взаимодействие со стенами
+        for(int x=man.x+1; x<man.x+man.w_; x+=11)
+            {
+                for(int y=man.y+2; y<man.y+man.h_; y+=12)
+                {
+                    if(txGetPixel(x, y) == RGB(0, 0, 0))
+                    {
+                        man.x = x_man_old;
+                        man.y = y_man_old;
+                    }
+                }
+            }
+//----------------
+ // Взаимодействие с ключом
+         if( man.x<key.x+key.w && man.x+11>key.x &&
+            man.y<key.y+key.h && man.y+11>key.y)
+        {
+            lock.visible = false;
+            key.visible = false;
+
+        }
+ //---------------------
+ //Взаимодействие с замком
+      if(lock.visible == true)
+      {
 
 
+            if( man.x<lock.x+lock.w && man.x+11>lock.x &&
+            man.y<lock.y+lock.h && man.y+11>lock.y)
+            {
+                man.x = x_man_old;
+                man.y = y_man_old;
+            }
+      }
+ //---------------------
+       if(GetAsyncKeyState(VK_ESCAPE))
+            {
+                PAGE = "menu";
+            }
+            btn2.visible = false;
+            txSetFillColor (TX_WHITE);
+            txSetColor (TX_BLACK);
+        }
+        if(PAGE == "1game")
+        {
+
+        txBitBlt(txDC(), 0, 0, 1280, 820, kartaezy);
+        key.draw();
+        lock.draw();
+        man.draw();
+        txSetColor(RGB(0, 0, 0), 15);
+
+        lock.x =965;
+        lock.y =564;
+        key.x = 472;
+        key.y = 578;
         x_man_old = man.x;
         y_man_old = man.y;
 //Управление
@@ -284,16 +447,22 @@ Button btn4 = {540, 300, 200, 40, "Об авторе", true};
         if(PAGE == "author")
         {
             btn3.draw();
+            //Возврат в меню
             if(btn3.click())
             {
                 PAGE = "menu";
             }
+            if(GetAsyncKeyState(VK_ESCAPE))
+            {
+                PAGE = "menu";
+            }
+            //---------------------
             btn2.visible = false;
             txBitBlt(txDC(), 0, 0, 1280, 820, menu);
             txSelectFont("Times New Roman", 30);
             txSetColor (TX_BLACK);
-            txDrawText(84, 254, 44+1000, 254+100, "Ссылка на игру- https://github.com/NIVqwerty/My-game.git");
-            txDrawText(84, 294, 84+600, 294+100, "Телеграмм автора - https://t.me/QwertyHoh");
+            txDrawText(0, 254, 44+1000, 254+100, "Ссылка на игру- https://github.com/NIVqwerty/My-game.git");
+            txDrawText(170, 294, 84+600, 294+100, "Телеграмм автора - https://t.me/QwertyHoh");
             btn3.draw();
         }
         txEnd();
@@ -301,6 +470,9 @@ Button btn4 = {540, 300, 200, 40, "Об авторе", true};
 
     }
 txDeleteDC(karta);
+txDeleteDC(kartaezy);
+txDeleteDC(minikarta);
+txDeleteDC(minikartaezy);
 txDeleteDC(menu);
 
 
