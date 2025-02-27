@@ -147,6 +147,7 @@ Button btn5 = {560, 380, 70, 40, "ДА", true};
 Button btn6 = {650, 380, 70, 40, "НЕТ", true};
 Button btn7 = {150, 394, 457, 40, "Лёгкий", true};
 Button btn8 = {690, 394, 457, 40, "Сложный", true};
+Button btn9 = {500, 300, 250, 60, "Следующий уровень", true};
 
 
 
@@ -224,11 +225,11 @@ Button btn8 = {690, 394, 457, 40, "Сложный", true};
             txBitBlt(txDC(), 0, 0, 1280, 820, menu);
             txSelectFont("Times New Roman", 30);
             txSetColor (TX_BLACK);
-            txDrawText(84, 254, 44+600, 254+100, "Esc-выход в меню");
-            txDrawText(84, 294, 84+600, 294+100, "W-вверх");
-            txDrawText(84, 324, 84+600, 324+100, "A-влево");
-            txDrawText(84, 354, 84+600, 354+100, "S-вниз");
-            txDrawText(84, 384, 84+600, 384+100, "D-вправо");
+            txDrawText(120, 254, 44+600, 254+100, "Esc-выход в меню");
+            txDrawText(84, 294, 84+500, 294+100, "W-вверх");
+            txDrawText(84, 324, 84+500, 324+100, "A-влево");
+            txDrawText(80, 354, 84+500, 354+100, "S-вниз");
+            txDrawText(100, 384, 84+500, 384+100, "D-вправо");
             btn3.draw();
         }
         if(PAGE == "startgame")
@@ -253,15 +254,20 @@ Button btn8 = {690, 394, 457, 40, "Сложный", true};
             if(btn8.click())
             {
                 PAGE = "game";
+                man.x=20;
+                lock.visible = true;
+                key.visible = true;
             }
              if(btn7.click())
             {
                 PAGE = "1game";
+                man.x=20;
+                lock.visible = true;
+                key.visible = true;
             }
         }
         if(PAGE == "game")
         {
-
         txBitBlt(txDC(), 0, 0, 1280, 820, karta);
         key.draw();
         lock.draw();
@@ -271,6 +277,8 @@ Button btn8 = {690, 394, 457, 40, "Сложный", true};
         lock.y =42;
         key.x = 153;
         key.y = 180;
+        man.w_ =30;
+        man.h_ =30;
         x_man_old = man.x;
         y_man_old = man.y;
 //Управление
@@ -345,7 +353,7 @@ Button btn8 = {690, 394, 457, 40, "Сложный", true};
  //---------------------
        if(GetAsyncKeyState(VK_ESCAPE))
             {
-                PAGE = "menu";
+                PAGE = "startgame";
             }
             btn2.visible = false;
             txSetFillColor (TX_WHITE);
@@ -359,17 +367,18 @@ Button btn8 = {690, 394, 457, 40, "Сложный", true};
         lock.draw();
         man.draw();
         txSetColor(RGB(0, 0, 0), 15);
-
         lock.x =965;
         lock.y =564;
         key.x = 472;
         key.y = 578;
+        man.w_ =40;
+        man.h_ =40;
         x_man_old = man.x;
         y_man_old = man.y;
 //Управление
         if(GetAsyncKeyState('S'))
         {
-            man.y += 5;
+            man.y += 6;
             man.yn_kard = 0;
             man.xn_kard += 1;
             if(man.xn_kard>3) man.xn_kard=0;
@@ -377,7 +386,7 @@ Button btn8 = {690, 394, 457, 40, "Сложный", true};
         }
         if(GetAsyncKeyState('A'))
         {
-            man.x -= 5;
+            man.x -= 6;
             man.xn_kard += 1;
             man.yn_kard = 1;
             if(man.xn_kard>3) man.xn_kard=0;
@@ -385,7 +394,7 @@ Button btn8 = {690, 394, 457, 40, "Сложный", true};
         }
         if(GetAsyncKeyState('D'))
         {
-            man.x += 5;
+            man.x += 6;
             man.xn_kard += 1;
             man.yn_kard = 2;
             if(man.xn_kard>3) man.xn_kard=0;
@@ -393,14 +402,26 @@ Button btn8 = {690, 394, 457, 40, "Сложный", true};
         }
         if(GetAsyncKeyState('W'))
         {
-            man.y -= 5;
+            man.y -= 6;
             man.yn_kard = 3;
             man.xn_kard += 1;
             if(man.xn_kard>3) man.xn_kard=0;
             txSleep(50);
         }
 //----------------
-
+//Преход на следующий уровнь
+        if( man.x>1000)
+        {
+         btn9.draw();
+        }
+        if(btn9.click())
+            {
+                man.x=20;
+                PAGE = "game";
+                lock.visible = true;
+                key.visible = true;
+            }
+//-----------------------------
 //Взаимодействие со стенами
         for(int x=man.x+1; x<man.x+man.w_; x+=11)
             {
@@ -413,8 +434,8 @@ Button btn8 = {690, 394, 457, 40, "Сложный", true};
                     }
                 }
             }
-//----------------
- // Взаимодействие с ключом
+//----------------------
+// Взаимодействие с ключом
          if( man.x<key.x+key.w && man.x+11>key.x &&
             man.y<key.y+key.h && man.y+11>key.y)
         {
@@ -422,8 +443,8 @@ Button btn8 = {690, 394, 457, 40, "Сложный", true};
             key.visible = false;
 
         }
- //---------------------
- //Взаимодействие с замком
+//---------------------
+//Взаимодействие с замком
       if(lock.visible == true)
       {
 
@@ -435,10 +456,10 @@ Button btn8 = {690, 394, 457, 40, "Сложный", true};
                 man.y = y_man_old;
             }
       }
- //---------------------
+//---------------------
        if(GetAsyncKeyState(VK_ESCAPE))
             {
-                PAGE = "menu";
+                PAGE = "startgame";
             }
             btn2.visible = false;
             txSetFillColor (TX_WHITE);
@@ -462,7 +483,7 @@ Button btn8 = {690, 394, 457, 40, "Сложный", true};
             txSelectFont("Times New Roman", 30);
             txSetColor (TX_BLACK);
             txDrawText(0, 254, 44+1000, 254+100, "Ссылка на игру- https://github.com/NIVqwerty/My-game.git");
-            txDrawText(170, 294, 84+600, 294+100, "Телеграмм автора - https://t.me/QwertyHoh");
+            txDrawText(175, 294, 84+600, 294+100, "Телеграмм автора - https://t.me/QwertyHoh");
             btn3.draw();
         }
         txEnd();
