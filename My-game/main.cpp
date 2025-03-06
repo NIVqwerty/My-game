@@ -131,6 +131,7 @@ HDC kartaezy = txLoadImage("Pictures/Mapezy.bmp");
 HDC minikarta = txLoadImage("Pictures/miniMap.bmp");
 HDC minikartaezy = txLoadImage("Pictures/miniMapezy.bmp");
 HDC menu = txLoadImage("Pictures/menu.bmp");
+HDC MG = txLoadImage("Pictures/LockGame.bmp");
 
 Man man = {10, 620, 30, 30, 100, 100, txLoadImage("Pictures/man.bmp"), 0};
 Lock lock ={1150,42,49,50,txLoadImage("Pictures/Lock.bmp"),true};
@@ -148,6 +149,8 @@ Button btn6 = {650, 380, 70, 40, "НЕТ", true};
 Button btn7 = {150, 394, 457, 40, "Лёгкий", true};
 Button btn8 = {690, 394, 457, 40, "Сложный", true};
 Button btn9 = {500, 300, 250, 60, "Следующий уровень", true};
+Button btn10 = {350, 300, 250, 60, "Заново", true};
+Button btn11 = {650, 300, 250, 60, "В меню", true};
 
 
 
@@ -315,7 +318,24 @@ Button btn9 = {500, 300, 250, 60, "Следующий уровень", true};
             txSleep(50);
         }
 //----------------
+        if( man.x>1167)
+        {
+         btn10.draw();
+         btn11.draw();
+        }
+        if(btn10.click())
+            {
+                man.x=20;
+                PAGE = "1game";
+                lock.visible = true;
+                key.visible = true;
+            }
+        if(btn11.click())
+        {
 
+            PAGE = "menu";
+
+        }
 //Взаимодействие со стенами
         for(int x=man.x+1; x<man.x+man.w_; x+=11)
             {
