@@ -1,26 +1,54 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
 <CodeBlocks_layout_file>
 	<ActiveTarget name="Debug" />
-	<File name="main.cpp" open="1" top="1" tabpos="1" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="main.cpp" open="1" top="0" tabpos="1" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="13604" topLine="405" />
+			<Cursor1 position="11479" topLine="129" />
 		</Cursor>
 		<Folding>
+			<Collapse line="26" />
+			<Collapse line="35" />
+			<Collapse line="38" />
+			<Collapse line="47" />
 			<Collapse line="58" />
-			<Collapse line="87" />
 			<Collapse line="97" />
 			<Collapse line="99" />
-			<Collapse line="171" />
-			<Collapse line="175" />
-			<Collapse line="179" />
-			<Collapse line="183" />
-			<Collapse line="285" />
-			<Collapse line="293" />
-			<Collapse line="301" />
-			<Collapse line="309" />
-			<Collapse line="413" />
-			<Collapse line="417" />
-			<Collapse line="440" />
+			<Collapse line="106" />
+			<Collapse line="116" />
+			<Collapse line="118" />
+			<Collapse line="124" />
+			<Collapse line="135" />
+			<Collapse line="140" />
+			<Collapse line="203" />
+			<Collapse line="207" />
+			<Collapse line="211" />
+			<Collapse line="217" />
+			<Collapse line="240" />
+			<Collapse line="263" />
+			<Collapse line="297" />
+			<Collapse line="346" />
+			<Collapse line="363" />
+			<Collapse line="390" />
+			<Collapse line="395" />
+			<Collapse line="401" />
+			<Collapse line="406" />
+			<Collapse line="422" />
+			<Collapse line="432" />
+			<Collapse line="456" />
+			<Collapse line="464" />
+			<Collapse line="472" />
+			<Collapse line="480" />
+			<Collapse line="490" />
+			<Collapse line="494" />
+			<Collapse line="503" />
+			<Collapse line="505" />
+			<Collapse line="507" />
+			<Collapse line="517" />
+			<Collapse line="525" />
+			<Collapse line="530" />
+			<Collapse line="537" />
+			<Collapse line="549" />
+			<Collapse line="553" />
 		</Folding>
 	</File>
 </CodeBlocks_layout_file>

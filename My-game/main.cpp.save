@@ -121,7 +121,47 @@ struct Lock
         }
     }
 };
+struct Pic
+{
 
+
+    int x;
+    int y;
+    int w;
+    int h;
+    HDC image;
+    bool visible;
+
+    void draw()
+    {
+        Win32::TransparentBlt(txDC(), x, y,64,80, image,0,0,w, h,TX_GREEN);
+    }
+
+    bool click()
+    {
+        return(txMouseX()>x && txMouseX()<x+64 &&
+                txMouseY()>y && txMouseY()<y+80 &&
+                txMouseButtons() == 1 && visible);
+    }
+};
+struct Kod
+{
+   int x;
+   int y;
+   int w;
+   int h;
+   HDC image;
+   bool visible;
+
+
+    void draw()
+    {
+        if (visible)
+        {
+            Win32::TransparentBlt(txDC(), x, y, 40, 40, image, 0, 0, w, h, TX_WHITE);
+        }
+    }
+};
 int main()
 {
 txCreateWindow (1280, 820);
@@ -133,9 +173,18 @@ HDC minikartaezy = txLoadImage("Pictures/miniMapezy.bmp");
 HDC menu = txLoadImage("Pictures/menu.bmp");
 HDC MG = txLoadImage("Pictures/LockGame.bmp");
 
+Pic pic1 = {496, 657,64, 80,  txLoadImage("Pictures/7.bmp"), true};
+Pic pic2 = {568, 657, 64, 80, txLoadImage("Pictures/3.bmp"), true};
+Pic pic3 = {640, 657, 64, 80, txLoadImage("Pictures/9.bmp"), true};
 Man man = {10, 620, 30, 30, 100, 100, txLoadImage("Pictures/man.bmp"), 0};
 Lock lock ={1150,42,49,50,txLoadImage("Pictures/Lock.bmp"),true};
 Key key ={153,180,50,25,txLoadImage("Pictures/Key.bmp"),true};
+Kod kod ={153,180,50,50,txLoadImage("Pictures/Kod.bmp"),true};
+Kod kod[3];
+kod[1] ={153,180,50,50,txLoadImage("Pictures/Kod.bmp"),true};
+kod[1] ={153,180,50,50,txLoadImage("Pictures/Kod.bmp"),true};
+kod[1] ={153,180,50,50,txLoadImage("Pictures/Kod.bmp"),true};
+
 int x_man_old, y_man_old;
 string PAGE = "menu";
 
@@ -272,14 +321,11 @@ Button btn11 = {650, 300, 250, 60, "В меню", true};
         if(PAGE == "game")
         {
         txBitBlt(txDC(), 0, 0, 1280, 820, karta);
-        key.draw();
         lock.draw();
         man.draw();
         txSetColor(RGB(0, 0, 0), 15);
         lock.x =1150;
         lock.y =42;
-        key.x = 153;
-        key.y = 180;
         man.w_ =30;
         man.h_ =30;
         x_man_old = man.x;
@@ -336,6 +382,7 @@ Button btn11 = {650, 300, 250, 60, "В меню", true};
             PAGE = "menu";
 
         }
+
 //Взаимодействие со стенами
         for(int x=man.x+1; x<man.x+man.w_; x+=11)
             {
@@ -349,6 +396,7 @@ Button btn11 = {650, 300, 250, 60, "В меню", true};
                 }
             }
 //----------------
+
  // Взаимодействие с ключом
          if( man.x<key.x+key.w && man.x+11>key.x &&
             man.y<key.y+key.h && man.y+11>key.y)
@@ -358,6 +406,7 @@ Button btn11 = {650, 300, 250, 60, "В меню", true};
 
         }
  //---------------------
+
  //Взаимодействие с замком
       if(lock.visible == true)
       {
@@ -369,6 +418,17 @@ Button btn11 = {650, 300, 250, 60, "В меню", true};
                 man.x = x_man_old;
                 man.y = y_man_old;
             }
+            if( man.x<lock.x+lock.w && man.x+11>lock.x-30 &&
+            man.y-10<lock.y+lock.h+10 && man.y+11>lock.y-20)
+            {
+                txSetColor(TX_GREEN);
+                txRectangle(6, 10, 44+400,70);
+                txDrawText(6, 10, 44+400,70, "Нажмите E для подстановки кода ");
+                if(GetAsyncKeyState('E'))
+                {
+                    PAGE = "minigame";
+                }
+            }
       }
  //---------------------
        if(GetAsyncKeyState(VK_ESCAPE))
@@ -379,6 +439,43 @@ Button btn11 = {650, 300, 250, 60, "В меню", true};
             txSetFillColor (TX_WHITE);
             txSetColor (TX_BLACK);
         }
+
+        if(PAGE == "minigame")
+        {
+        txBitBlt(txDC(), 0, 0, 1280, 820, karta);
+        lock.draw();
+        man.draw();
+        txBitBlt(txDC(), 400, 200, 400+392, 400+401, MG);
+        pic1.draw();
+        pic2.draw();
+        pic3.draw();
+         if(pic1.click())
+            {
+                pic1.x=txMouseX()-30;
+                pic1.y=txMouseY()-40;
+            }
+         if(pic2.click())
+        {
+            pic2.x=txMouseX()-30;
+            pic2.y=txMouseY()-40;
+        }
+        if(pic3.click())
+        {
+            pic3.x=txMouseX()-30;
+            pic3.y=txMouseY()-40;
+        }
+
+        if(pic1.x ==96+400 & pic1.y== 257+200 & pic2.x ==168+400 & pic2.y== 257+200 &pic3.x ==240+400 & pic3.y== 257+200)
+        {
+        lock.visible = false;
+        }
+        if(lock.visible == false)
+        {
+         PAGE = "game";
+        }
+
+        }
+
         if(PAGE == "1game")
         {
 
