@@ -158,7 +158,7 @@ struct Kod
     {
         if (visible)
         {
-            Win32::TransparentBlt(txDC(), x, y, 40, 40, image, 0, 0, w, h, TX_WHITE);
+            Win32::TransparentBlt(txDC(), x, y, w, h, image, 0, 0,50, 50,  TX_BLUE);
         }
     }
 };
@@ -173,17 +173,19 @@ HDC minikartaezy = txLoadImage("Pictures/miniMapezy.bmp");
 HDC menu = txLoadImage("Pictures/menu.bmp");
 HDC MG = txLoadImage("Pictures/LockGame.bmp");
 
-Pic pic1 = {496, 657,64, 80,  txLoadImage("Pictures/7.bmp"), true};
-Pic pic2 = {568, 657, 64, 80, txLoadImage("Pictures/3.bmp"), true};
-Pic pic3 = {640, 657, 64, 80, txLoadImage("Pictures/9.bmp"), true};
+Pic pic1 = {496, 657,64, 80,  txLoadImage("Pictures/7.bmp"), false};
+Pic pic2 = {568, 657, 64, 80, txLoadImage("Pictures/3.bmp"), false};
+Pic pic3 = {640, 657, 64, 80, txLoadImage("Pictures/9.bmp"), false};
 Man man = {10, 620, 30, 30, 100, 100, txLoadImage("Pictures/man.bmp"), 0};
 Lock lock ={1150,42,49,50,txLoadImage("Pictures/Lock.bmp"),true};
 Key key ={153,180,50,25,txLoadImage("Pictures/Key.bmp"),true};
 Kod kod ={153,180,50,50,txLoadImage("Pictures/Kod.bmp"),true};
-Kod kod[3];
-kod[1] ={153,180,50,50,txLoadImage("Pictures/Kod.bmp"),true};
-kod[1] ={153,180,50,50,txLoadImage("Pictures/Kod.bmp"),true};
-kod[1] ={153,180,50,50,txLoadImage("Pictures/Kod.bmp"),true};
+Kod hkod ={153,181,40,40,txLoadImage("Pictures/Hkod.bmp"),true};
+Kod bkod ={300,181,500,500,txLoadImage("Pictures/739.bmp"),false};
+Kod kodmas[3];
+kodmas[0] ={93, 504,37,40,kod.image,true};
+kodmas[1] ={888,309,37,40,kod.image,true};
+kodmas[2] ={1055,721,37,40,kod.image,true};
 
 int x_man_old, y_man_old;
 string PAGE = "menu";
@@ -308,7 +310,10 @@ Button btn11 = {650, 300, 250, 60, "В меню", true};
                 PAGE = "game";
                 man.x=20;
                 lock.visible = true;
-                key.visible = true;
+                kodmas[0].visible = true;
+                kodmas[1].visible = true;
+                kodmas[2].visible = true;
+
             }
              if(btn7.click())
             {
@@ -322,18 +327,23 @@ Button btn11 = {650, 300, 250, 60, "В меню", true};
         {
         txBitBlt(txDC(), 0, 0, 1280, 820, karta);
         lock.draw();
+        hkod.draw();
         man.draw();
+        bkod.draw();
         txSetColor(RGB(0, 0, 0), 15);
         lock.x =1150;
         lock.y =42;
         man.w_ =30;
         man.h_ =30;
+        kodmas[0].draw();
+        kodmas[1].draw();
+        kodmas[2].draw();
         x_man_old = man.x;
         y_man_old = man.y;
 //Управление
         if(GetAsyncKeyState('S'))
         {
-            man.y += 5;
+            man.y += 7;
             man.yn_kard = 0;
             man.xn_kard += 1;
             if(man.xn_kard>3) man.xn_kard=0;
@@ -341,7 +351,7 @@ Button btn11 = {650, 300, 250, 60, "В меню", true};
         }
         if(GetAsyncKeyState('A'))
         {
-            man.x -= 5;
+            man.x -= 7;
             man.xn_kard += 1;
             man.yn_kard = 1;
             if(man.xn_kard>3) man.xn_kard=0;
@@ -349,7 +359,7 @@ Button btn11 = {650, 300, 250, 60, "В меню", true};
         }
         if(GetAsyncKeyState('D'))
         {
-            man.x += 5;
+            man.x += 7;
             man.xn_kard += 1;
             man.yn_kard = 2;
             if(man.xn_kard>3) man.xn_kard=0;
@@ -357,7 +367,7 @@ Button btn11 = {650, 300, 250, 60, "В меню", true};
         }
         if(GetAsyncKeyState('W'))
         {
-            man.y -= 5;
+            man.y -= 7;
             man.yn_kard = 3;
             man.xn_kard += 1;
             if(man.xn_kard>3) man.xn_kard=0;
@@ -383,7 +393,7 @@ Button btn11 = {650, 300, 250, 60, "В меню", true};
 
         }
 
-//Взаимодействие со стенами
+/*Взаимодействие со стенами
         for(int x=man.x+1; x<man.x+man.w_; x+=11)
             {
                 for(int y=man.y+2; y<man.y+man.h_; y+=12)
@@ -395,18 +405,34 @@ Button btn11 = {650, 300, 250, 60, "В меню", true};
                     }
                 }
             }
-//----------------
+ */
 
- // Взаимодействие с ключом
-         if( man.x<key.x+key.w && man.x+11>key.x &&
-            man.y<key.y+key.h && man.y+11>key.y)
+ // Взаимодействие с частями кода
+if( man.x< hkod.x+hkod.w && man.x+11>hkod.x &&
+            man.y<hkod.y+hkod.h && man.y+11>hkod.y)
+            {
+            bkod.visible = true;
+            txSetColor(TX_GREEN);
+            txRectangle(6, 10, 44+400,70);
+            txDrawText(6, 10, 44+400,70, "Зажмите E чтобы закрыть подсказку ");
+            if(GetAsyncKeyState('E'))
+                {
+                 bkod.visible = false;
+                }
+            }
+ else
+ {
+ bkod.visible = false;
+ }
+ for (int i=0; i<3; i++)
         {
-            lock.visible = false;
-            key.visible = false;
+    if( man.x< kodmas[i].x+kodmas[i].w && man.x+11>kodmas[i].x &&
+            man.y<kodmas[i].y+kodmas[i].h && man.y+11>kodmas[i].y)
+            {
+                kodmas[i].visible = false;
 
+            }
         }
- //---------------------
-
  //Взаимодействие с замком
       if(lock.visible == true)
       {
@@ -427,10 +453,13 @@ Button btn11 = {650, 300, 250, 60, "В меню", true};
                 if(GetAsyncKeyState('E'))
                 {
                     PAGE = "minigame";
+                    pic1.visible = false;
+                    pic2.visible = false;
+                    pic3.visible = false;
                 }
             }
       }
- //---------------------
+
        if(GetAsyncKeyState(VK_ESCAPE))
             {
                 PAGE = "startgame";
@@ -439,32 +468,53 @@ Button btn11 = {650, 300, 250, 60, "В меню", true};
             txSetFillColor (TX_WHITE);
             txSetColor (TX_BLACK);
         }
-
         if(PAGE == "minigame")
         {
         txBitBlt(txDC(), 0, 0, 1280, 820, karta);
         lock.draw();
         man.draw();
+        btn3.draw();
         txBitBlt(txDC(), 400, 200, 400+392, 400+401, MG);
+
+        if(kodmas[0].visible == false)
+        {
         pic1.draw();
+        pic1.visible = true;
+        }
+         if(kodmas[1].visible == false)
+        {
         pic2.draw();
+        pic2.visible = true;
+        }
+         if(kodmas[2].visible == false)
+        {
         pic3.draw();
+        pic3.visible = true;
+        }
+        if(pic1.visible == true)
+        {
          if(pic1.click())
             {
                 pic1.x=txMouseX()-30;
                 pic1.y=txMouseY()-40;
             }
+        }
+        if(pic2.visible == true)
+        {
          if(pic2.click())
         {
             pic2.x=txMouseX()-30;
             pic2.y=txMouseY()-40;
         }
+        }
+        if(pic3.visible == true)
+        {
         if(pic3.click())
         {
             pic3.x=txMouseX()-30;
             pic3.y=txMouseY()-40;
         }
-
+        }
         if(pic1.x ==96+400 & pic1.y== 257+200 & pic2.x ==168+400 & pic2.y== 257+200 &pic3.x ==240+400 & pic3.y== 257+200)
         {
         lock.visible = false;
@@ -473,7 +523,13 @@ Button btn11 = {650, 300, 250, 60, "В меню", true};
         {
          PAGE = "game";
         }
-
+        if(GetAsyncKeyState(VK_ESCAPE))
+            {
+                PAGE = "game";
+            }
+        txSetColor(TX_GREEN);
+        txRectangle(6, 10, 44+400,70);
+        txDrawText(6, 10, 44+400,70, "Нажмите Esc выхода из мини-игры ");
         }
 
         if(PAGE == "1game")
@@ -495,7 +551,7 @@ Button btn11 = {650, 300, 250, 60, "В меню", true};
 //Управление
         if(GetAsyncKeyState('S'))
         {
-            man.y += 6;
+            man.y += 9;
             man.yn_kard = 0;
             man.xn_kard += 1;
             if(man.xn_kard>3) man.xn_kard=0;
@@ -503,7 +559,7 @@ Button btn11 = {650, 300, 250, 60, "В меню", true};
         }
         if(GetAsyncKeyState('A'))
         {
-            man.x -= 6;
+            man.x -= 9;
             man.xn_kard += 1;
             man.yn_kard = 1;
             if(man.xn_kard>3) man.xn_kard=0;
@@ -511,7 +567,7 @@ Button btn11 = {650, 300, 250, 60, "В меню", true};
         }
         if(GetAsyncKeyState('D'))
         {
-            man.x += 6;
+            man.x += 9;
             man.xn_kard += 1;
             man.yn_kard = 2;
             if(man.xn_kard>3) man.xn_kard=0;
@@ -519,7 +575,7 @@ Button btn11 = {650, 300, 250, 60, "В меню", true};
         }
         if(GetAsyncKeyState('W'))
         {
-            man.y -= 6;
+            man.y -= 9;
             man.yn_kard = 3;
             man.xn_kard += 1;
             if(man.xn_kard>3) man.xn_kard=0;
