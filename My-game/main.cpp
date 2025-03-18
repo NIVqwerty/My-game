@@ -173,10 +173,10 @@ HDC minikartaezy = txLoadImage("Pictures/miniMapezy.bmp");
 HDC menu = txLoadImage("Pictures/menu.bmp");
 HDC MG = txLoadImage("Pictures/LockGame.bmp");
 
-Pic pic1 = {496, 657,64, 80,  txLoadImage("Pictures/7.bmp"), false};
-Pic pic2 = {568, 657, 64, 80, txLoadImage("Pictures/3.bmp"), false};
-Pic pic3 = {640, 657, 64, 80, txLoadImage("Pictures/9.bmp"), false};
-Man man = {10, 620, 30, 30, 100, 100, txLoadImage("Pictures/man.bmp"), 0};
+Pic pic1 = {1006, 607,64, 80,  txLoadImage("Pictures/7.bmp"), false};
+Pic pic2 = {50, 64, 64, 80, txLoadImage("Pictures/3.bmp"), false};
+Pic pic3 = {568, 657, 64, 80, txLoadImage("Pictures/9.bmp"), false};
+Man man = {10, 620, 30, 30, 100, 100, txLoadImage("Pictures/man123.bmp"), 0};
 Lock lock ={1150,42,49,50,txLoadImage("Pictures/Lock.bmp"),true};
 Key key ={153,180,50,25,txLoadImage("Pictures/Key.bmp"),true};
 Kod kod ={153,180,50,50,txLoadImage("Pictures/Kod.bmp"),true};
@@ -473,7 +473,10 @@ if( man.x< hkod.x+hkod.w && man.x+11>hkod.x &&
         txBitBlt(txDC(), 0, 0, 1280, 820, karta);
         lock.draw();
         man.draw();
-        btn3.draw();
+        bkod.draw();
+        kodmas[0].draw();
+        kodmas[1].draw();
+        kodmas[2].draw();
         txBitBlt(txDC(), 400, 200, 400+392, 400+401, MG);
 
         if(kodmas[0].visible == false)
@@ -491,6 +494,8 @@ if( man.x< hkod.x+hkod.w && man.x+11>hkod.x &&
         pic3.draw();
         pic3.visible = true;
         }
+        if(!pic2.click()&!pic3.click())
+        {
         if(pic1.visible == true)
         {
          if(pic1.click())
@@ -499,6 +504,9 @@ if( man.x< hkod.x+hkod.w && man.x+11>hkod.x &&
                 pic1.y=txMouseY()-40;
             }
         }
+        }
+        if(!pic1.click()&!pic3.click())
+        {
         if(pic2.visible == true)
         {
          if(pic2.click())
@@ -507,12 +515,17 @@ if( man.x< hkod.x+hkod.w && man.x+11>hkod.x &&
             pic2.y=txMouseY()-40;
         }
         }
+        }
+        if(!pic2.click()&!pic1.click())
+        {
         if(pic3.visible == true)
         {
+         if(pic3.click())
         if(pic3.click())
-        {
+         {
             pic3.x=txMouseX()-30;
             pic3.y=txMouseY()-40;
+         }
         }
         }
         if(pic1.x ==96+400 & pic1.y== 257+200 & pic2.x ==168+400 & pic2.y== 257+200 &pic3.x ==240+400 & pic3.y== 257+200)
