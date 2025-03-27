@@ -172,3 +172,103 @@ Run file:	C:\Инженерка\Project Game\My-game\bin\Debug\My game.exe
 Directory:	C:\Инженерка\Project Game\My-game
 
 --------------------------------------------------
+
+--------------------------------------------------
+TXLib сообщает:
+
+Программа: C:\Инженерка\Project Game\My-game\bin\Debug\My game.exe, файл: c:\ded32\codeblocks\mingw\include\txlib.h, строка: 13490, функция: bool {anonymous}::TX::txDrawText(double, double, double, double, const char*, unsigned int, HDC),
+
+Сообщение: Параметр y0 = 414 больше, чем y1 = 354. Текст выводиться не будет.
+
+#1: TXLib [Ver: 00173a, Rev: 173, Date: 2024-06-23 22:37:05 +0400], Instance: 0x0050A2FC (32-bit), Flags: CMdRe0, Thread: 0x2660 (Main), GetLastError(): 13 (Недопустимые данные). 
+
+--------------------------------------------------
+Стек вызовов:
+
+
+
+--------------------------------------------------
+Стек вызовов TX:
+
+# 0 in bool {anonymous}::TX::txDrawText(double, double, double, double, const char*, unsigned int, HDC) at c:\ded32\codeblocks\mingw\include\txlib.h:13490:
+
+  13488:         {
+  13489: $       SetLastError (ERROR_INVALID_DATA);
+=>13490: $       TX_ERROR ("Параметр y0 = %g больше, чем y1 = %g. Текст выводиться не будет.", y0, y1);
+  13491:         }
+  13492: 
+
+# 1 in int main() at C:\Инженерка\Project Game\My-game\main.cpp:292:
+
+    290:             txDrawText(80, 354, 84+500, 354+100, "S-вниз");
+    291:             txDrawText(100, 384, 84+500, 384+100, "D-вправо");
+=>  292:             txDrawText(120, 414, 44+600, 254+100, "E-взаимодействие");
+    293:             btn3.draw();
+    294:         }
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 173, Date: 2024-06-23 22:37:05 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	c:\ded32\codeblocks\mingw\include\txlib.h
+Compiled:	Mar 27 2025 18:27:20, GNU g++ 4.8.1, std=201103L, MinGW Runtime 3.20, 32-bit, DEBUG
+Started:	Mar 27 2025 18:27:36
+
+Run file:	C:\Инженерка\Project Game\My-game\bin\Debug\My game.exe
+Directory:	C:\Инженерка\Project Game\My-game
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib сообщает:
+
+Программа: C:\Инженерка\Project Game\My-game\bin\Debug\My game.exe, файл: c:\ded32\codeblocks\mingw\include\txlib.h, строка: 13490, функция: bool {anonymous}::TX::txDrawText(double, double, double, double, const char*, unsigned int, HDC),
+
+Сообщение: Параметр y0 = 414 больше, чем y1 = 354. Текст выводиться не будет.
+
+#1: TXLib [Ver: 00173a, Rev: 173, Date: 2024-06-23 22:37:05 +0400], Instance: 0x0050A2FC (32-bit), Flags: CMdRe0, Thread: 0x4198 (Main), GetLastError(): 13 (Недопустимые данные). 
+
+--------------------------------------------------
+Стек вызовов:
+
+
+
+--------------------------------------------------
+Стек вызовов TX:
+
+# 0 in bool {anonymous}::TX::txDrawText(double, double, double, double, const char*, unsigned int, HDC) at c:\ded32\codeblocks\mingw\include\txlib.h:13490:
+
+  13488:         {
+  13489: $       SetLastError (ERROR_INVALID_DATA);
+=>13490: $       TX_ERROR ("Параметр y0 = %g больше, чем y1 = %g. Текст выводиться не будет.", y0, y1);
+  13491:         }
+  13492: 
+
+# 1 in int main() at C:\Инженерка\Project Game\My-game\main.cpp:292:
+
+    290:             txDrawText(80, 354, 84+500, 354+100, "S-вниз");
+    291:             txDrawText(100, 384, 84+500, 384+100, "D-вправо");
+=>  292:             txDrawText(120, 414, 44+600, 254+100, "E-взаимодействие");
+    293:             btn3.draw();
+    294:         }
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 173, Date: 2024-06-23 22:37:05 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	c:\ded32\codeblocks\mingw\include\txlib.h
+Compiled:	Mar 27 2025 18:27:58, GNU g++ 4.8.1, std=201103L, MinGW Runtime 3.20, 32-bit, DEBUG
+Started:	Mar 27 2025 18:28:12
+
+Run file:	C:\Инженерка\Project Game\My-game\bin\Debug\My game.exe
+Directory:	C:\Инженерка\Project Game\My-game
+
+--------------------------------------------------

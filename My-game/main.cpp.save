@@ -41,7 +41,7 @@ struct Button
         txSetFillColor (RGB(133,205,181));
         Win32::RoundRect (txDC(), x, y, x+w, y+h, 30, 30);
         txSelectFont("Times New Roman", 30);
-        txSetColor (TX_BLACK);
+        txSetColor (RGB(26,62,48));
         txDrawText(x, y, x+w, y+h, text);
         }
         else
@@ -50,7 +50,7 @@ struct Button
         txSetFillColor (RGB(71,147,121));
         Win32::RoundRect (txDC(), x, y, x+w, y+h, 30, 30);
         txSelectFont("Times New Roman", 30);
-        txSetColor (TX_BLACK);
+        txSetColor (RGB(26,62,48));
         txDrawText(x, y, x+w, y+h, text);
         }
     }
@@ -171,12 +171,13 @@ HDC kartaezy = txLoadImage("Pictures/Mapezy.bmp");
 HDC minikarta = txLoadImage("Pictures/miniMap.bmp");
 HDC minikartaezy = txLoadImage("Pictures/miniMapezy.bmp");
 HDC menu = txLoadImage("Pictures/menu.bmp");
+HDC menu1 = txLoadImage("Pictures/menu1.bmp");
 HDC MG = txLoadImage("Pictures/LockGame.bmp");
 
 Pic pic1 = {1006, 607,64, 80,  txLoadImage("Pictures/7.bmp"), false};
 Pic pic2 = {50, 64, 64, 80, txLoadImage("Pictures/3.bmp"), false};
 Pic pic3 = {568, 657, 64, 80, txLoadImage("Pictures/9.bmp"), false};
-Man man = {10, 620, 30, 30, 100, 100, txLoadImage("Pictures/man.bmp"), 0};
+Man man = {10, 620, 30, 30, 100, 100, txLoadImage("Pictures/man123.bmp"), 0};
 Lock lock ={1150,42,49,50,txLoadImage("Pictures/Lock.bmp"),true};
 Key key ={153,180,50,25,txLoadImage("Pictures/Key.bmp"),true};
 Kod kod ={153,180,50,50,txLoadImage("Pictures/Kod.bmp"),true};
@@ -190,13 +191,13 @@ kodmas[2] ={1055,721,37,40,kod.image,true};
 int x_man_old, y_man_old;
 string PAGE = "menu";
 
-Button btn0 = {540, 200, 200, 40, "Играть", true};
-Button btn1 = {540, 250, 200, 40, "Управление", true};
-Button btn2 = {540, 350, 200, 40, "Выход", true};
+Button btn0 = {540, 350, 200, 40, "Играть", true};
+Button btn1 = {540, 400, 200, 40, "Управление", true};
+Button btn2 = {540, 500, 200, 40, "Выход", true};
 Button btn3 = {5, 5, 200, 40, "Назад", true};
-Button btn4 = {540, 300, 200, 40, "Об авторе", true};
-Button btn5 = {560, 380, 70, 40, "ДА", true};
-Button btn6 = {650, 380, 70, 40, "НЕТ", true};
+Button btn4 = {540, 450, 200, 40, "Об авторе", true};
+Button btn5 = {560, 380, 70, 40, "ДА", false};
+Button btn6 = {650, 380, 70, 40, "НЕТ", false};
 Button btn7 = {150, 394, 457, 40, "Лёгкий", true};
 Button btn8 = {690, 394, 457, 40, "Сложный", true};
 Button btn9 = {500, 300, 250, 60, "Следующий уровень", true};
@@ -216,12 +217,14 @@ Button btn11 = {650, 300, 250, 60, "В меню", true};
         btn2.visible = true;
         if(PAGE == "menu")
         {
-            txBitBlt(txDC(), 0, 0, 1280, 820, menu);
+
+            txBitBlt(txDC(), 0, 0, 1280, 820, menu1);
             btn0.draw();
             btn1.draw();
             btn2.draw();
             btn4.draw();
-
+            btn5.visible = false;
+            btn6.visible = false;
             if(btn0.click())
             {
                 PAGE = "startgame";
@@ -242,6 +245,8 @@ Button btn11 = {650, 300, 250, 60, "В меню", true};
         }
         if(PAGE == "leave")
         {
+        btn5.visible = true;
+        btn6.visible = true;
         btn3.draw();
         //Возврат в меню
         if(btn6.click())
@@ -284,6 +289,7 @@ Button btn11 = {650, 300, 250, 60, "В меню", true};
             txDrawText(84, 324, 84+500, 324+100, "A-влево");
             txDrawText(80, 354, 84+500, 354+100, "S-вниз");
             txDrawText(100, 384, 84+500, 384+100, "D-вправо");
+            txDrawText(120, 254, 44+600, 254+100, "E-взаимодействие");
             btn3.draw();
         }
         if(PAGE == "startgame")
