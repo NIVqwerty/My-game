@@ -203,6 +203,7 @@ Button btn8 = {690, 394, 457, 40, "Сложный", true};
 Button btn9 = {500, 300, 250, 60, "Следующий уровень", true};
 Button btn10 = {350, 300, 250, 60, "Заново", true};
 Button btn11 = {650, 300, 250, 60, "В меню", true};
+Button btn12 = {540, 500, 200, 40, "Сюжет", true};
 
 
 
@@ -289,7 +290,7 @@ Button btn11 = {650, 300, 250, 60, "В меню", true};
             txDrawText(84, 324, 84+500, 324+100, "A-влево");
             txDrawText(80, 354, 84+500, 354+100, "S-вниз");
             txDrawText(100, 384, 84+500, 384+100, "D-вправо");
-            txDrawText(120, 254, 44+600, 254+100, "E-взаимодействие");
+            txDrawText(120, 414, 44+600, 414+100, "E-взаимодействие");
             btn3.draw();
         }
         if(PAGE == "startgame")
@@ -300,7 +301,13 @@ Button btn11 = {650, 300, 250, 60, "В меню", true};
         btn3.draw();
         btn7.draw();
         btn8.draw();
+        btn12.draw();
         txDrawText(550, 50, 550+300, 50+50, "Выбирете уровень:");
+        // Сюжет
+        if(btn12.click())
+            {
+                PAGE = "history";
+            }
             //Возврат в меню
             if(btn3.click())
             {
@@ -677,7 +684,27 @@ if( man.x< hkod.x+hkod.w && man.x+11>hkod.x &&
             txDrawText(175, 294, 84+600, 294+100, "Телеграмм автора - https://t.me/QwertyHoh");
             btn3.draw();
         }
-
+        if(PAGE == "history")
+        {
+        int x=1100;
+        while(x<0);
+        {
+        txBitBlt(txDC(), 0, 0, 1280, 820, menu);
+        txSetColor(TX_BLACK);
+        txDrawText(290, x-300, 850, 200+100, "Джон отправился в экспидицию в джунгли");
+        txDrawText(290, x-250, 850, 250+100, "где встретил таинственную грабницу");
+        txDrawText(290,x-200, 850, 300+100, "Он решил изучить ее, но случайно заблудился");
+        txDrawText(290, x-150, 850, 350+100, "Пока он искал выход ");
+        txDrawText(290, x-100, 850, 400+100, "он наступил на какую-то ловушку ");
+        txDrawText(290, x-50, 850, 450+100, "все проходы закрылись на замки");
+        txDrawText(230, x, 1000, 500+100, "Теперь ему помимо выхода искать ключи и фрагменты кода ");
+        x-=100
+        }
+        if(x>0||x==0)
+        {
+        
+        }
+        }
         txEnd();
         txSleep(50);
 
@@ -687,6 +714,7 @@ txDeleteDC(kartaezy);
 txDeleteDC(minikarta);
 txDeleteDC(minikartaezy);
 txDeleteDC(menu);
+txDeleteDC(menu1);
 
 
 txDisableAutoPause();

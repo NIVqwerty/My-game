@@ -203,6 +203,7 @@ Button btn8 = {690, 394, 457, 40, "Сложный", true};
 Button btn9 = {500, 300, 250, 60, "Следующий уровень", true};
 Button btn10 = {350, 300, 250, 60, "Заново", true};
 Button btn11 = {650, 300, 250, 60, "В меню", true};
+Button btn12 = {540, 500, 200, 40, "Сюжет", true};
 
 
 
@@ -300,7 +301,13 @@ Button btn11 = {650, 300, 250, 60, "В меню", true};
         btn3.draw();
         btn7.draw();
         btn8.draw();
+        btn12.draw();
         txDrawText(550, 50, 550+300, 50+50, "Выбирете уровень:");
+        // Сюжет
+        if(btn12.click())
+            {
+                PAGE = "history";
+            }
             //Возврат в меню
             if(btn3.click())
             {
@@ -331,6 +338,7 @@ Button btn11 = {650, 300, 250, 60, "В меню", true};
         }
         if(PAGE == "game")
         {
+        txBegin();
         txBitBlt(txDC(), 0, 0, 1280, 820, karta);
         lock.draw();
         hkod.draw();
@@ -473,6 +481,7 @@ if( man.x< hkod.x+hkod.w && man.x+11>hkod.x &&
             btn2.visible = false;
             txSetFillColor (TX_WHITE);
             txSetColor (TX_BLACK);
+            txEnd();
         }
         if(PAGE == "minigame")
         {
@@ -552,7 +561,7 @@ if( man.x< hkod.x+hkod.w && man.x+11>hkod.x &&
         }
         if(PAGE == "1game")
         {
-
+        txBegin();
         txBitBlt(txDC(), 0, 0, 1280, 820, kartaezy);
         key.draw();
         lock.draw();
@@ -655,6 +664,7 @@ if( man.x< hkod.x+hkod.w && man.x+11>hkod.x &&
             btn2.visible = false;
             txSetFillColor (TX_WHITE);
             txSetColor (TX_BLACK);
+            txEnd();
         }
         if(PAGE == "author")
         {
@@ -677,7 +687,29 @@ if( man.x< hkod.x+hkod.w && man.x+11>hkod.x &&
             txDrawText(175, 294, 84+600, 294+100, "Телеграмм автора - https://t.me/QwertyHoh");
             btn3.draw();
         }
+        if(PAGE == "history")
+        {
+        int ycor=1200;
+        while(ycor+100>0)
+        {
+        txBitBlt(txDC(), 0, 0, 1280, 820, menu);
+        txSetColor(TX_BLACK);
+        txDrawText(290, ycor-300, 850, ycor-200, "Джон отправился в экспидицию в джунгли,");
+        txDrawText(290, ycor-250, 850, ycor-150, "где встретил таинственную грабницу.");
+        txDrawText(290,ycor-200, 850, ycor-100, "Он решил изучить ее, но случайно заблудился.");
+        txDrawText(290, ycor-150, 850, ycor-50, "Пока он искал выход, ");
+        txDrawText(290, ycor-100, 850, ycor, "он наступил на какую-то ловушку");
+        txDrawText(290, ycor-50, 850, ycor+50, " и все проходы закрылись на замки.");
+        txDrawText(230, ycor, 1000, ycor+100, "Теперь ему помимо выхода нужно искать ключи и фрагменты кода! ");
+        ycor-=3;
+        if(ycor>0||ycor==0)
+        {
+        PAGE = "startgame";
+        }
+        txSleep(30);
+        }
 
+        }
         txEnd();
         txSleep(50);
 
