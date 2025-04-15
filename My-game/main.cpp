@@ -647,8 +647,6 @@ if( man.x< hkod.x+hkod.w && man.x+11>hkod.x &&
 //Взаимодействие с замком
       if(lock.visible == true)
       {
-
-
             if( man.x<lock.x+lock.w && man.x+11>lock.x &&
             man.y<lock.y+lock.h && man.y+11>lock.y)
             {

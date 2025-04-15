@@ -338,6 +338,7 @@ Button btn12 = {540, 500, 200, 40, "Сюжет", true};
         }
         if(PAGE == "game")
         {
+        txBegin();
         txBitBlt(txDC(), 0, 0, 1280, 820, karta);
         lock.draw();
         hkod.draw();
@@ -480,6 +481,7 @@ if( man.x< hkod.x+hkod.w && man.x+11>hkod.x &&
             btn2.visible = false;
             txSetFillColor (TX_WHITE);
             txSetColor (TX_BLACK);
+            txEnd();
         }
         if(PAGE == "minigame")
         {
@@ -559,7 +561,7 @@ if( man.x< hkod.x+hkod.w && man.x+11>hkod.x &&
         }
         if(PAGE == "1game")
         {
-
+        txBegin();
         txBitBlt(txDC(), 0, 0, 1280, 820, kartaezy);
         key.draw();
         lock.draw();
@@ -645,8 +647,6 @@ if( man.x< hkod.x+hkod.w && man.x+11>hkod.x &&
 //Взаимодействие с замком
       if(lock.visible == true)
       {
-
-
             if( man.x<lock.x+lock.w && man.x+11>lock.x &&
             man.y<lock.y+lock.h && man.y+11>lock.y)
             {
@@ -662,6 +662,7 @@ if( man.x< hkod.x+hkod.w && man.x+11>hkod.x &&
             btn2.visible = false;
             txSetFillColor (TX_WHITE);
             txSetColor (TX_BLACK);
+            txEnd();
         }
         if(PAGE == "author")
         {
@@ -686,24 +687,26 @@ if( man.x< hkod.x+hkod.w && man.x+11>hkod.x &&
         }
         if(PAGE == "history")
         {
-        int x=1100;
-        while(x<0);
+        int ycor=1200;
+        while(ycor+100>0)
         {
         txBitBlt(txDC(), 0, 0, 1280, 820, menu);
         txSetColor(TX_BLACK);
-        txDrawText(290, x-300, 850, 200+100, "Джон отправился в экспидицию в джунгли");
-        txDrawText(290, x-250, 850, 250+100, "где встретил таинственную грабницу");
-        txDrawText(290,x-200, 850, 300+100, "Он решил изучить ее, но случайно заблудился");
-        txDrawText(290, x-150, 850, 350+100, "Пока он искал выход ");
-        txDrawText(290, x-100, 850, 400+100, "он наступил на какую-то ловушку ");
-        txDrawText(290, x-50, 850, 450+100, "все проходы закрылись на замки");
-        txDrawText(230, x, 1000, 500+100, "Теперь ему помимо выхода искать ключи и фрагменты кода ");
-        x-=100
-        }
-        if(x>0||x==0)
+        txDrawText(290, ycor-300, 850, ycor-200, "Джон отправился в экспидицию в джунгли,");
+        txDrawText(290, ycor-250, 850, ycor-150, "где встретил таинственную грабницу.");
+        txDrawText(290,ycor-200, 850, ycor-100, "Он решил изучить ее, но случайно заблудился.");
+        txDrawText(290, ycor-150, 850, ycor-50, "Пока он искал выход, ");
+        txDrawText(290, ycor-100, 850, ycor, "он наступил на какую-то ловушку");
+        txDrawText(290, ycor-50, 850, ycor+50, " и все проходы закрылись на замки.");
+        txDrawText(230, ycor, 1000, ycor+100, "Теперь ему помимо выхода нужно искать ключи и фрагменты кода! ");
+        ycor-=3;
+        if(ycor>0||ycor==0)
         {
-        
+        PAGE = "startgame";
         }
+        txSleep(30);
+        }
+
         }
         txEnd();
         txSleep(50);
