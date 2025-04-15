@@ -1,0 +1,374 @@
+
+--------------------------------------------------
+TXLib соболезнует...
+
+Программа: C:\Инженерка\Project Game\My game\bin\Debug\My game.exe, файл: c:\ded32\codeblocks\mingw\include\txlib.h, строка: 13722, функция: bool {anonymous}::TX::txBitBlt(HDC, double, double, double, double, HDC, double, double, unsigned int),
+
+Сообщение: Параметр "sourceImage" неверен. Возможно, этот холст не создан, или уже уничтожен, или не загрузилась картинка.
+
+#1: TXLib [Ver: 00173a, Rev: 173, Date: 2024-06-23 22:37:05 +0400], Instance: 0x005082FC (32-bit), Flags: CMdRe0, Thread: 0x4A14 (Main), GetLastError(): 13 (Недопустимые данные). 
+
+--------------------------------------------------
+Стек вызовов:
+
+
+
+--------------------------------------------------
+Стек вызовов TX:
+
+# 0 in bool {anonymous}::TX::txBitBlt(HDC, double, double, double, double, HDC, double, double, unsigned int) at c:\ded32\codeblocks\mingw\include\txlib.h:13722:
+
+  13720:     {
+  13721: $1  if (_TX_HDC_FAILED (destImage))   return false;
+=>13722: $   if (_TX_HDC_FAILED (sourceImage)) return false;
+  13723: 
+  13724: $   POINT size = txGetExtent (sourceImage);
+
+# 1 in int main() at C:\Инженерка\Project Game\SeaBattle-main\main.cpp:122:
+
+    120:         if(PAGE == "menu")
+    121:         {
+=>  122:             txBitBlt(txDC(), 0, 0, 800, 600, menu);
+    123:             btn0.draw();
+    124:             btn1.draw();
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 173, Date: 2024-06-23 22:37:05 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	c:\ded32\codeblocks\mingw\include\txlib.h
+Compiled:	Feb  4 2025 19:27:14, GNU g++ 4.8.1, std=201103L, MinGW Runtime 3.20, 32-bit, DEBUG
+Started:	Feb 04 2025 19:27:28
+
+Run file:	C:\Инженерка\Project Game\My game\bin\Debug\My game.exe
+Directory:	C:\Инженерка\Project Game\My game
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib соболезнует...
+
+Программа: C:\Инженерка\Project Game\My game\bin\Debug\My game.exe, файл: c:\ded32\codeblocks\mingw\include\txlib.h, строка: 14346, функция: intptr_t {anonymous}::TX::txPlayVideo(int, int, int, int, const char*, double, double, HWND),
+
+Сообщение: Возможно, окно рисования не создано или не в порядке.
+
+#2: TXLib [Ver: 00173a, Rev: 173, Date: 2024-06-23 22:37:05 +0400], Instance: 0x005082FC (32-bit), Flags: CMdre0, Thread: 0x4A14 (Main), GetLastError(): 13 (Недопустимые данные). 
+
+--------------------------------------------------
+Стек вызовов:
+
+
+
+--------------------------------------------------
+Стек вызовов TX:
+
+# 0 in intptr_t {anonymous}::TX::txPlayVideo(int, int, int, int, const char*, double, double, HWND) at c:\ded32\codeblocks\mingw\include\txlib.h:14346:
+
+  14344:                       double zoom /*= 0*/, double gain /*= 1*/, HWND wnd /*= txWindow()*/)
+  14345:     {
+=>14346: $1  if (wnd && wnd == txWindow() && _TX_TXWINDOW_FAILED()) return -1;
+  14347: 
+  14348: $   int time = GetTickCount();  //-V2551
+
+# 1 in intptr_t {anonymous}::TX::txPlayVideo(const char*, double, double, HWND) at c:\ded32\codeblocks\mingw\include\txlib.h:14498:
+
+  14496: intptr_t txPlayVideo (const char fileName[], double zoom /*= 0*/, double gain /*= 0*/, HWND wnd /*= txWindow()*/)
+  14497:     {
+=>14498: $1  return txPlayVideo (0, 0, 0, 0, fileName, zoom, gain, wnd);
+  14499:     }
+  14500: 
+
+# 2 in void {anonymous}::TX::_txCleanup() at c:\ded32\codeblocks\mingw\include\txlib.h:9116:
+
+   9114: 
+   9115: $   txSpeak     (NULL);
+=> 9116: $   txPlayVideo (NULL);
+   9117: 
+   9118: $   delete _txCanvas_UserDCs;
+
+# 3 in bool {anonymous}::TX::txBitBlt(HDC, double, double, double, double, HDC, double, double, unsigned int) at c:\ded32\codeblocks\mingw\include\txlib.h:13722:
+
+  13720:     {
+  13721: $1  if (_TX_HDC_FAILED (destImage))   return false;
+=>13722: $   if (_TX_HDC_FAILED (sourceImage)) return false;
+  13723: 
+  13724: $   POINT size = txGetExtent (sourceImage);
+
+# 4 in int main() at C:\Инженерка\Project Game\SeaBattle-main\main.cpp:122:
+
+    120:         if(PAGE == "menu")
+    121:         {
+=>  122:             txBitBlt(txDC(), 0, 0, 800, 600, menu);
+    123:             btn0.draw();
+    124:             btn1.draw();
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 173, Date: 2024-06-23 22:37:05 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	c:\ded32\codeblocks\mingw\include\txlib.h
+Compiled:	Feb  4 2025 19:27:14, GNU g++ 4.8.1, std=201103L, MinGW Runtime 3.20, 32-bit, DEBUG
+Started:	Feb 04 2025 19:27:28
+
+Run file:	C:\Инженерка\Project Game\My game\bin\Debug\My game.exe
+Directory:	C:\Инженерка\Project Game\My game
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib соболезнует...
+
+Программа: C:\Инженерка\Project Game\My-game\bin\Debug\My game.exe, файл: c:\ded32\codeblocks\mingw\include\txlib.h, строка: 13722, функция: bool {anonymous}::TX::txBitBlt(HDC, double, double, double, double, HDC, double, double, unsigned int),
+
+Сообщение: Параметр "sourceImage" неверен. Возможно, этот холст не создан, или уже уничтожен, или не загрузилась картинка.
+
+#1: TXLib [Ver: 00173a, Rev: 173, Date: 2024-06-23 22:37:05 +0400], Instance: 0x005082FC (32-bit), Flags: CMdRe0, Thread: 0x30F4 (Main), GetLastError(): 13 (Недопустимые данные). 
+
+--------------------------------------------------
+Стек вызовов:
+
+
+
+--------------------------------------------------
+Стек вызовов TX:
+
+# 0 in bool {anonymous}::TX::txBitBlt(HDC, double, double, double, double, HDC, double, double, unsigned int) at c:\ded32\codeblocks\mingw\include\txlib.h:13722:
+
+  13720:     {
+  13721: $1  if (_TX_HDC_FAILED (destImage))   return false;
+=>13722: $   if (_TX_HDC_FAILED (sourceImage)) return false;
+  13723: 
+  13724: $   POINT size = txGetExtent (sourceImage);
+
+# 1 in int main() at C:\Инженерка\Project Game\SeaBattle-main\main.cpp:122:
+
+    120:         if(PAGE == "menu")
+    121:         {
+=>  122:             txBitBlt(txDC(), 0, 0, 800, 600, menu);
+    123:             btn0.draw();
+    124:             btn1.draw();
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 173, Date: 2024-06-23 22:37:05 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	c:\ded32\codeblocks\mingw\include\txlib.h
+Compiled:	Feb 20 2025 13:34:24, GNU g++ 4.8.1, std=201103L, MinGW Runtime 3.20, 32-bit, DEBUG
+Started:	Feb 20 2025 13:34:33
+
+Run file:	C:\Инженерка\Project Game\My-game\bin\Debug\My game.exe
+Directory:	C:\Инженерка\Project Game\My-game
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib сообщает:
+
+Программа: C:\Инженерка\Project Game\My-game\bin\Debug\My game.exe, файл: c:\ded32\codeblocks\mingw\include\txlib.h, строка: 13490, функция: bool {anonymous}::TX::txDrawText(double, double, double, double, const char*, unsigned int, HDC),
+
+Сообщение: Параметр y0 = 414 больше, чем y1 = 354. Текст выводиться не будет.
+
+#1: TXLib [Ver: 00173a, Rev: 173, Date: 2024-06-23 22:37:05 +0400], Instance: 0x0050A2FC (32-bit), Flags: CMdRe0, Thread: 0x2660 (Main), GetLastError(): 13 (Недопустимые данные). 
+
+--------------------------------------------------
+Стек вызовов:
+
+
+
+--------------------------------------------------
+Стек вызовов TX:
+
+# 0 in bool {anonymous}::TX::txDrawText(double, double, double, double, const char*, unsigned int, HDC) at c:\ded32\codeblocks\mingw\include\txlib.h:13490:
+
+  13488:         {
+  13489: $       SetLastError (ERROR_INVALID_DATA);
+=>13490: $       TX_ERROR ("Параметр y0 = %g больше, чем y1 = %g. Текст выводиться не будет.", y0, y1);
+  13491:         }
+  13492: 
+
+# 1 in int main() at C:\Инженерка\Project Game\My-game\main.cpp:292:
+
+    290:             txDrawText(80, 354, 84+500, 354+100, "S-вниз");
+    291:             txDrawText(100, 384, 84+500, 384+100, "D-вправо");
+=>  292:             txDrawText(120, 414, 44+600, 254+100, "E-взаимодействие");
+    293:             btn3.draw();
+    294:         }
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 173, Date: 2024-06-23 22:37:05 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	c:\ded32\codeblocks\mingw\include\txlib.h
+Compiled:	Mar 27 2025 18:27:20, GNU g++ 4.8.1, std=201103L, MinGW Runtime 3.20, 32-bit, DEBUG
+Started:	Mar 27 2025 18:27:36
+
+Run file:	C:\Инженерка\Project Game\My-game\bin\Debug\My game.exe
+Directory:	C:\Инженерка\Project Game\My-game
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib сообщает:
+
+Программа: C:\Инженерка\Project Game\My-game\bin\Debug\My game.exe, файл: c:\ded32\codeblocks\mingw\include\txlib.h, строка: 13490, функция: bool {anonymous}::TX::txDrawText(double, double, double, double, const char*, unsigned int, HDC),
+
+Сообщение: Параметр y0 = 414 больше, чем y1 = 354. Текст выводиться не будет.
+
+#1: TXLib [Ver: 00173a, Rev: 173, Date: 2024-06-23 22:37:05 +0400], Instance: 0x0050A2FC (32-bit), Flags: CMdRe0, Thread: 0x4198 (Main), GetLastError(): 13 (Недопустимые данные). 
+
+--------------------------------------------------
+Стек вызовов:
+
+
+
+--------------------------------------------------
+Стек вызовов TX:
+
+# 0 in bool {anonymous}::TX::txDrawText(double, double, double, double, const char*, unsigned int, HDC) at c:\ded32\codeblocks\mingw\include\txlib.h:13490:
+
+  13488:         {
+  13489: $       SetLastError (ERROR_INVALID_DATA);
+=>13490: $       TX_ERROR ("Параметр y0 = %g больше, чем y1 = %g. Текст выводиться не будет.", y0, y1);
+  13491:         }
+  13492: 
+
+# 1 in int main() at C:\Инженерка\Project Game\My-game\main.cpp:292:
+
+    290:             txDrawText(80, 354, 84+500, 354+100, "S-вниз");
+    291:             txDrawText(100, 384, 84+500, 384+100, "D-вправо");
+=>  292:             txDrawText(120, 414, 44+600, 254+100, "E-взаимодействие");
+    293:             btn3.draw();
+    294:         }
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 173, Date: 2024-06-23 22:37:05 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	c:\ded32\codeblocks\mingw\include\txlib.h
+Compiled:	Mar 27 2025 18:27:58, GNU g++ 4.8.1, std=201103L, MinGW Runtime 3.20, 32-bit, DEBUG
+Started:	Mar 27 2025 18:28:12
+
+Run file:	C:\Инженерка\Project Game\My-game\bin\Debug\My game.exe
+Directory:	C:\Инженерка\Project Game\My-game
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib сообщает:
+
+Программа: C:\Инженерка\Project Game\My-game\bin\Debug\My game.exe, файл: c:\ded32\codeblocks\mingw\include\txlib.h, строка: 13490, функция: bool {anonymous}::TX::txDrawText(double, double, double, double, const char*, unsigned int, HDC),
+
+Сообщение: Параметр y0 = 400 больше, чем y1 = 354. Текст выводиться не будет.
+
+#1: TXLib [Ver: 00173a, Rev: 173, Date: 2024-06-23 22:37:05 +0400], Instance: 0x0050A2FC (32-bit), Flags: CMdRe0, Thread: 0x2F0C (Main), GetLastError(): 13 (Недопустимые данные). 
+
+--------------------------------------------------
+Стек вызовов:
+
+
+
+--------------------------------------------------
+Стек вызовов TX:
+
+# 0 in bool {anonymous}::TX::txDrawText(double, double, double, double, const char*, unsigned int, HDC) at c:\ded32\codeblocks\mingw\include\txlib.h:13490:
+
+  13488:         {
+  13489: $       SetLastError (ERROR_INVALID_DATA);
+=>13490: $       TX_ERROR ("Параметр y0 = %g больше, чем y1 = %g. Текст выводиться не будет.", y0, y1);
+  13491:         }
+  13492: 
+
+# 1 in int main() at C:\Инженерка\Project Game\My-game\main.cpp:694:
+
+    692:         txDrawText(120, 300, 44+600, 254+100, "Он решил изучить ее, но случайно заблудился");
+    693:         txDrawText(120, 350, 44+600, 254+100, "Пока он искал выход ");
+=>  694:         txDrawText(120, 400, 44+600, 254+100, "он наступил на какую-то ловушку ");
+    695:         txDrawText(120, 450, 44+600, 254+100, "все проходы закрылись на замки");
+    696:         txDrawText(120, 500, 44+600, 254+100, "Теперь ему помимо выхода искать ключи и фрагменты кода ");
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 173, Date: 2024-06-23 22:37:05 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	c:\ded32\codeblocks\mingw\include\txlib.h
+Compiled:	Apr  1 2025 18:26:10, GNU g++ 4.8.1, std=201103L, MinGW Runtime 3.20, 32-bit, DEBUG
+Started:	Apr 01 2025 18:26:20
+
+Run file:	C:\Инженерка\Project Game\My-game\bin\Debug\My game.exe
+Directory:	C:\Инженерка\Project Game\My-game
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib сообщает:
+
+Программа: C:\Инженерка\Project Game\My-game\bin\Debug\My game.exe, файл: c:\ded32\codeblocks\mingw\include\txlib.h, строка: 13490, функция: bool {anonymous}::TX::txDrawText(double, double, double, double, const char*, unsigned int, HDC),
+
+Сообщение: Параметр y0 = 800 больше, чем y1 = 300. Текст выводиться не будет.
+
+#1: TXLib [Ver: 00173a, Rev: 173, Date: 2024-06-23 22:37:05 +0400], Instance: 0x0050A2FC (32-bit), Flags: CMdRe0, Thread: 0x1DF4 (Main), GetLastError(): 13 (Недопустимые данные). 
+
+--------------------------------------------------
+Стек вызовов:
+
+
+
+--------------------------------------------------
+Стек вызовов TX:
+
+# 0 in bool {anonymous}::TX::txDrawText(double, double, double, double, const char*, unsigned int, HDC) at c:\ded32\codeblocks\mingw\include\txlib.h:13490:
+
+  13488:         {
+  13489: $       SetLastError (ERROR_INVALID_DATA);
+=>13490: $       TX_ERROR ("Параметр y0 = %g больше, чем y1 = %g. Текст выводиться не будет.", y0, y1);
+  13491:         }
+  13492: 
+
+# 1 in int main() at C:\Инженерка\Project Game\My-game\main.cpp:694:
+
+    692:         txBitBlt(txDC(), 0, 0, 1280, 820, menu);
+    693:         txSetColor(TX_BLACK);
+=>  694:         txDrawText(290, x-300, 850, 200+100, "Джон отправился в экспидицию в джунгли");
+    695:         txDrawText(290, x-250, 850, 250+100, "где встретил таинственную грабницу");
+    696:         txDrawText(290,x-200, 850, 300+100, "Он решил изучить ее, но случайно заблудился");
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 173, Date: 2024-06-23 22:37:05 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	c:\ded32\codeblocks\mingw\include\txlib.h
+Compiled:	Apr  1 2025 18:40:03, GNU g++ 4.8.1, std=201103L, MinGW Runtime 3.20, 32-bit, DEBUG
+Started:	Apr 01 2025 18:40:14
+
+Run file:	C:\Инженерка\Project Game\My-game\bin\Debug\My game.exe
+Directory:	C:\Инженерка\Project Game\My-game
+
+--------------------------------------------------
